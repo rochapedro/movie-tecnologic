@@ -1,0 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+.progress, .progress-bar {
+    height: 16px;
+}
+
+.progress-bar {
+    background-color: var(--bs-warning);
+}

@@ -11,24 +11,45 @@
                                     <p class="mb-0">Digite seu e-mail e senha para fazer login</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form">
+                                   
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+                
                                         <label>Email</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" placeholder="Email"
-                                                aria-label="Email" aria-describedby="email-addon" name="email" id="email">
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
+                
                                         <label>Senha</label>
                                         <div class="mb-3">
-                                            <input type="password" class="form-control" placeholder="Senha"
-                                                aria-label="Password" aria-describedby="password-addon" name="password" id="password">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password" required autocomplete="current-password">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
+
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="rememberMe"
-                                                checked="" name="remember" id="remember">
+                                            <input class="form-check-input" type="checkbox" name="remember"
+                                                id="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <label class="form-check-label" for="rememberMe">Lembrar de mim</label>
                                         </div>
+                
                                         <div class="text-center">
-                                            <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Fazer login</button>
+                                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Fazer
+                                                login</button>
                                         </div>
                                     </form>
                                 </div>
@@ -49,10 +70,10 @@
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
-          var options = {
-            damping: '0.5'
-          }
-          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-      </script>
+    </script>
 </x-layout.public>

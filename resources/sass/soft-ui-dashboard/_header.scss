@@ -3,12 +3,16 @@
   position: $page-header-position;
   overflow: $page-header-overflow;
   display: $page-header-display;
-  align-items: $page-header-align-items;
+  /* align-items: $page-header-align-items; */
   background-size: $page-header-bg-size;
   background-position: $page-header-bg-position;
 
   .container {
     z-index: $page-header-conteiner-index;
+  }
+
+  .row {
+    margin-top: 200px;
   }
 }
 
