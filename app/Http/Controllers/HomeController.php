@@ -9,15 +9,6 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -38,7 +29,8 @@ class HomeController extends Controller
     public function findWarranty(Request $request) {
         $sale = Sales::where('serial_number', '=', $request->serial_number)->with('models')->first();
 
-        // data limite da garantia
+        if ($sale) {
+            // data limite da garantia
         $warranty_period = Carbon::parse($sale->warranty_period);
 
         // data da compra
@@ -60,9 +52,9 @@ class HomeController extends Controller
         $sale->warranty_status = $atual_date <= $warranty_period ? true : false;
         $sale->warranty_percent = $warranty_percent;
 
-        if ($sale) {
-            $configurations = Configurations::latest()->first();
+        $configurations = Configurations::latest()->first();
             return view('pages/public/warranty/found')->with(['sale' => $sale, 'configurations' => $configurations]);
+
         } else {
             return redirect()->back()->withErrors(['msg' => 'Número de série não encontrado']);
         }
