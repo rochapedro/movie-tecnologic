@@ -30,14 +30,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-4 mx-auto text-center">
-                    @if ($configurations->whatsapp)
+                    @if (optional($configurations)->whatsapp)
                         <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                             <i class="fa fa-whatsapp" aria-hidden="true"></i>
                             {{ $configurations->whatsapp }}
                         </a>
                     @endif
 
-                    @if ($configurations->telephone)
+                    @if (optional($configurations)->telephone)
                         <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                           <i class="fa fa-phone" aria-hidden="true"></i>
                             {{ $configurations->telephone }}
@@ -48,14 +48,19 @@
             <div class="row">
                 <div class="col-8 mx-auto text-center mt-1">
                     <p class="mb-0 text-secondary">
-                      <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                          {{ $configurations->email }}
-                      </a>
-                      <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        <strong>CNPJ: </strong>
-                          {{ $configurations->cnpj }}
-                      </a>
+                        @if (optional($configurations)->email)
+                        <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                              {{ $configurations->email }}
+                          </a>
+                    @endif
+                      
+                      @if (optional($configurations)->cnpj)
+                        <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+                            <strong>CNPJ: </strong>
+                            {{ $configurations->cnpj }}
+                        </a>
+                    @endif
                     </p>
                 </div>
             </div>
